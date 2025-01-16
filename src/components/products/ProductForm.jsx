@@ -1,18 +1,21 @@
 import React from 'react'
 import { addProduct } from '../../services/ProductService'
 
-function ProductForm() {
+function ProductForm({onAddProduct}) {
 
     // Function to be called when form will be submitted
      
     const submitHandler=(e)=>{
-
+       e.preventDefault();
        addProduct({
           productId:e.target.productId.value,
           productName:e.target.productName.value,
           productDescription:e.target.productDescription.value,
           productprice:e.target.productprice.value
-       }).then(data=>data)
+       }).then(data=>{
+        onAddProduct();
+        return data;
+       })
 
     }
 
@@ -44,7 +47,10 @@ function ProductForm() {
                   {/* Product Price */}
                   <div className="mb-3">
                     <label for="exampleInputEmail1" className="form-label">Product price</label>
-                    <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='productprice' />
+                    <input type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" 
+                    
+                    
+                    name='productprice' />
                 </div>
 
                   {/* Button to submit form  */}

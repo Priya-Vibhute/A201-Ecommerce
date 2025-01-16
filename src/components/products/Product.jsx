@@ -13,6 +13,12 @@ function Product() {
     })
 
   }, [])
+// To refresh all product when you add product
+  const refreshProducts=()=>{
+    getProducts().then(data=>{
+       setProducts(data);    
+    })
+  }
 
   return (
     <div>
@@ -21,7 +27,7 @@ function Product() {
 
           <div class="col">
             {/*ProductForm Start */}
-            <ProductForm />
+            <ProductForm onAddProduct={refreshProducts} />
             {/*ProductForm End */}
           </div>
 
@@ -36,6 +42,7 @@ function Product() {
                     productName={p.productName}
                     productDescription={p.productDescription}
                     productPrice={p.productprice}
+                    product_link={p._links.self.href}
                   />
                 )
               })}
