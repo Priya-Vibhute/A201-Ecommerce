@@ -1,9 +1,13 @@
 import React from 'react'
+import { getProductById } from '../../services/ProductService'
 
-function ProductItem({productName,productDescription,productPrice,product_link}) {
+function ProductItem({productName,productDescription,productPrice,product_link,onSelectProduct}) {
 
-    const onSelectUpdate=(link)=>{
-              console.log(link);
+    const onSelectUpdate=async (link)=>{
+            //   console.log(link);
+            let product=await getProductById(link);
+            onSelectProduct(product)
+
     }
     return (
         <div>

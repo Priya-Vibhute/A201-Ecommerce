@@ -19,6 +19,9 @@ function Product() {
        setProducts(data);    
     })
   }
+// To set selected Product
+const handleSelectProduct=(selectedProduct)=>{}
+
 
   return (
     <div>
@@ -43,6 +46,7 @@ function Product() {
                     productDescription={p.productDescription}
                     productPrice={p.productprice}
                     product_link={p._links.self.href}
+                    onSelectProduct={handleSelectProduct}
                   />
                 )
               })}
