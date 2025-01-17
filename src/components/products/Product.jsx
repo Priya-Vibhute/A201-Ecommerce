@@ -5,6 +5,7 @@ import ProductForm from './ProductForm'
 
 function Product() {
   let [products, setProducts] = useState([])
+  let[selectedProduct,setSelectedProduct]=useState(null);
 
   useEffect(() => {
 
@@ -20,7 +21,11 @@ function Product() {
     })
   }
 // To set selected Product
-const handleSelectProduct=(selectedProduct)=>{}
+const handleSelectProduct=(selectedProduct)=>{
+
+   setSelectedProduct(selectedProduct);
+   console.log(selectedProduct);
+}
 
 
   return (
