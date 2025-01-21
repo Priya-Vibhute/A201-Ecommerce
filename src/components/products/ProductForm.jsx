@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { addProduct } from '../../services/ProductService'
+import { addProduct, updateProduct } from '../../services/ProductService'
 
 function ProductForm({ onAddProduct, selectedProduct }) {
 
@@ -31,8 +31,8 @@ function ProductForm({ onAddProduct, selectedProduct }) {
 //     To control change in input box
    
     const handleChange=(e)=>{
-       console.log(e.target)
-        let {name,value,type}=e.target;
+        console.log(e.target)
+        let {name,value}=e.target;
         console.log(name+" "+value);
         setProduct((prevProduct)=>{
 
@@ -42,9 +42,28 @@ function ProductForm({ onAddProduct, selectedProduct }) {
     }
 
     // ==========================================================
+    //   To handle update
+    
+    const updateHandler=(e)=>{
+        e.preventDefault();
+        console.log("Update Handler called");
+        updateProduct(selectedProduct._links.self.href,{
+            productName: e.target.productName.value,
+            productDescription: e.target.productDescription.value,
+            productprice: e.target.productprice.value
+        }).then(data=>{
+            onAddProduct();
+            setProduct({ productId: '', productName: '', productDescription: '', productprice: '' });
+            
+        })
+
+        
+    }
+
+    // ==========================================================
     return (
         <div className='container border border-primary border-3 p-3 my-3'>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={selectedProduct?updateHandler:submitHandler}>
                 <h1 className='bg-primary p-2 text-white text-center'>Add Product</h1>
                 {/* Product Id */}
                 <div className="mb-3">
@@ -78,7 +97,9 @@ function ProductForm({ onAddProduct, selectedProduct }) {
                 </div>
 
                 {/* Button to submit form  */}
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">
+                    {selectedProduct?"Update":"Submit"}
+                </button>
 
 
             </form>
