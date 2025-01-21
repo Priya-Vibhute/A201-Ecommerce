@@ -24,7 +24,7 @@ function Product() {
 const handleSelectProduct=(selectedProduct)=>{
 
    setSelectedProduct(selectedProduct);
-   console.log(selectedProduct);
+   
 }
 
 
@@ -35,7 +35,7 @@ const handleSelectProduct=(selectedProduct)=>{
 
           <div class="col">
             {/*ProductForm Start */}
-            <ProductForm onAddProduct={refreshProducts} />
+            <ProductForm onAddProduct={refreshProducts} selectedProduct={selectedProduct} />
             {/*ProductForm End */}
           </div>
 
@@ -52,6 +52,7 @@ const handleSelectProduct=(selectedProduct)=>{
                     productPrice={p.productprice}
                     product_link={p._links.self.href}
                     onSelectProduct={handleSelectProduct}
+                   
                   />
                 )
               })}
